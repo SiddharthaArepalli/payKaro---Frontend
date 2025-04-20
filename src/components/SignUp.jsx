@@ -22,25 +22,25 @@ const Signup = () => {
                 <SubHeading label={"Enter your information to create an account"} />
                 <InputBox onChange={e => {
                     setFirstName(e.target.value);
-                }} placeholder="John" label={"First Name"} />
+                }} placeholder="xyz" label={"First Name"} />
                 <InputBox onChange={(e) => {
                     setLastName(e.target.value);
-                }} placeholder="Doe" label={"Last Name"} />
+                }} placeholder="xyz" label={"Last Name"} />
                 <InputBox onChange={e => {
                     setUsername(e.target.value);
-                }} placeholder="harkirat@gmail.com" label={"Email"} />
+                }} placeholder="example@gmail.com" label={"Email"} />
                 <InputBox onChange={(e) => {
                     setPassword(e.target.value);
                 }} placeholder="123456" label={"Password"} />
                 <div className="pt-4">
                     <Button onClick={async () => {
                         try {
-                            const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
+                            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/signup`, {
                                 username,
                                 firstName,
                                 lastName,
                                 password
-                            });
+                            });                            
                             localStorage.setItem("token", response.data.token);
                             navigate("/signin");
                         } catch (error) {
