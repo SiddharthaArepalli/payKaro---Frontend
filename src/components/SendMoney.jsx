@@ -15,8 +15,8 @@ const SendMoney = () => {
                 alert("You are not logged in!");
                 return;
             }
-            const backendUrl = import.meta.env.VITE_BACKEND_URL.replace(/\/+$/, "");
-            const response = await axios.post(`${backendUrl}/api/v1/transactions/send`, {
+            const backendUrl = import.meta.env.VITE_BACKEND_URL;
+            const response = await axios.post(`${backendUrl}/api/v1/account/transfer`, {
                 to: id,
                 amount: Number(amount) // Make sure it's a number
             }, {

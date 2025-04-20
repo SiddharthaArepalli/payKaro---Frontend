@@ -1,22 +1,18 @@
-import React from 'react';
-import axios from 'axios';
 
-const Appbar = () => {
-    const fetchUserProfile = async () => {
-        try {
-            const backendUrl = import.meta.env.VITE_BACKEND_URL.replace(/\/+$/, "");
-            const response = await axios.get(`${backendUrl}/api/v1/user/profile`);
-            console.log(response.data);
-        } catch (error) {
-            console.error("Failed to fetch user profile:", error.response?.data || error.message);
-        }
-    };
-
-    return (
-        <div className="appbar">
-            <button onClick={fetchUserProfile}>Fetch Profile</button>
+export const Appbar = () => {
+    return <div className="shadow h-14 flex justify-between">
+        <div className="flex flex-col justify-center h-full ml-4">
+            PayTM App
         </div>
-    );
-};
-
-export default Appbar;
+        <div className="flex">
+            <div className="flex flex-col justify-center h-full mr-4">
+                Hello
+            </div>
+            <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center mt-1 mr-2">
+                <div className="flex flex-col justify-center h-full text-xl">
+                    U
+                </div>
+            </div>
+        </div>
+    </div>
+}
