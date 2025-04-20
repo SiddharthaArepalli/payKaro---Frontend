@@ -14,7 +14,9 @@ const Signin = () => {
 
     const handleSignIn = async () => {
         try {
-            const response = await axios.post("http://localhost:3000/api/v1/user/signin", {
+            // Remove trailing slash from the backend URL if it exists
+            const backendUrl = import.meta.env.VITE_BACKEND_URL.replace(/\/+$/, "");
+            const response = await axios.post(`${backendUrl}/api/v1/user/signin`, {
                 username,
                 password
             });
