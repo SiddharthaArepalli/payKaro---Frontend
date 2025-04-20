@@ -10,7 +10,7 @@ const Dashboard = () => {
             <div className="m-8">
                 <div className="rounded-lg bg-white p-4">
                     <div className="mt-4">
-                        <Users />
+                        <Users limit={6} /> {/* Pass limit prop */}
                     </div>
                 </div>
             </div>

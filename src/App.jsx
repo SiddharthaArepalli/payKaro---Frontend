@@ -6,11 +6,20 @@ import DashBoard from './components/DashBoard';
 import Signin from './components/Signin';
 import SignUp from './components/SignUp';
 import Send from './components/SendMoney';
+import SignatureBadge from './components/SignatureBadge';
+import {useEffect }from 'react';
 
 function App() {
+  useEffect(() => {
+    console.log(
+      "%cDeveloped by Sid with ❤️",
+      "color: #e91e63; font-size: 16px; font-weight: bold;"
+    );
+  }, []);
   return (
     <BrowserRouter>
       <Navbar />
+      <SignatureBadge/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<DashBoard />} />

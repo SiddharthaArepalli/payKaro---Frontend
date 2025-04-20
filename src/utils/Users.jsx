@@ -3,7 +3,7 @@ import { Button } from "./Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export const Users = () => {
+export const Users = ({ limit }) => { // Accept limit as a prop
     const [users, setUsers] = useState([]);
     const [filter, setFilter] = useState("");
     const [currentUserId, setCurrentUserId] = useState(null);
@@ -21,14 +21,16 @@ export const Users = () => {
         axios.get("http://localhost:3000/api/v1/user/bulk?filter=" + filter)
             .then(response => {
                 const allUsers = response.data.users || [];
-                const filteredUsers = allUsers.filter(user => user._id !== currentUserId); // Exclude current user
+                const filteredUsers = allUsers
+                    .filter(user => user._id !== currentUserId) // Exclude current user
+                    .slice(0, limit || allUsers.length); // Limit users if limit is provided
                 setUsers(filteredUsers);
             })
             .catch(error => {
                 console.error("Error fetching users:", error);
                 setUsers([]);
             });
-    }, [filter, currentUserId]);
+    }, [filter, currentUserId, limit]); // Add limit to dependency array
 
     useEffect(() => {
         if (currentUserId) {

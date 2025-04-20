@@ -30,7 +30,7 @@ const Appbar = () => {
         <div className="shadow h-14 flex justify-between mt-5">
             <Balance value={balance} />
             <div className="flex">
-                <div className="flex flex-col justify-center h-full mr-4">
+                <div className="color-[white] flex flex-col justify-center h-full mr-4 ">
                     Hello
                 </div>
                 <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center mt-1 mr-5">
