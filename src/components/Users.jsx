@@ -2,15 +2,12 @@ import { useEffect, useState } from "react"
 import { Button } from "./Button"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-
 export const Users = () => {
     // Replace with backend call
     const [users, setUsers] = useState([]);
     const [filter, setFilter] = useState("");
-    const backendUrl = import.meta.env.VITE_BACKEND_URL.replace(/\/+$/, "");
     useEffect(() => {
-        axios.get(`${backendUrl}/api/v1/user/bulk?filter=` + filter)
+        axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/bulk?filter=` + filter)
             .then(response => {
                 setUsers(response.data.user)
             })
