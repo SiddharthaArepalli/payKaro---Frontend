@@ -10,6 +10,14 @@ const Appbar = () => {
             try {
                 const token = localStorage.getItem("token");
                 const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+                if (!backendUrl) {
+                    console.error("Backend URL is not defined. Check your environment variables.");
+                    return;
+                }
+
+                console.log("Attempting to fetch balance from:", backendUrl);
+
                 const response = await axios.get(`${backendUrl}/api/v1/account/balance`, {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -19,7 +27,7 @@ const Appbar = () => {
                 const formattedBalance = `: ${parseFloat(response.data.balance).toFixed(2)}`;
                 setBalance(formattedBalance);
             } catch (error) {
-                console.error("Error fetching balance:", error);
+                console.error("Error fetching balance:", error.message || error);
             }
         };
 
