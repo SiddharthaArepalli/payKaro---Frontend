@@ -1,68 +1,43 @@
-import { useEffect, useState } from "react";
-import { Button } from "./Button";
+import { useEffect, useState } from "react"
+import { Button } from "./Button"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-export const Users = ({ limit }) => { // Accept limit as a prop
+export const Users = () => {
+    // Replace with backend call
     const [users, setUsers] = useState([]);
     const [filter, setFilter] = useState("");
-    const [currentUserId, setCurrentUserId] = useState(null);
-    const [balance, setBalance] = useState(null); // Added state for balance
-
     useEffect(() => {
         const token = localStorage.getItem("token");
-        if (token) {
-            const payload = JSON.parse(atob(token.split(".")[1])); // Decode JWT to get userId
-            setCurrentUserId(payload.userId);
-        }
-    }, []);
-
-    useEffect(() => {
-        axios.get("http://localhost:3000/api/v1/user/bulk?filter=" + filter)
-            .then(response => {
-                const allUsers = response.data.users || [];
-                const filteredUsers = allUsers
-                    .filter(user => user._id !== currentUserId) // Exclude current user
-                    .slice(0, limit || allUsers.length); // Limit users if limit is provided
-                setUsers(filteredUsers);
-            })
-            .catch(error => {
-                console.error("Error fetching users:", error);
-                setUsers([]);
-            });
-    }, [filter, currentUserId, limit]); // Add limit to dependency array
-
-    useEffect(() => {
-        if (currentUserId) {
-            const token = localStorage.getItem("token");
-            axios.get("http://localhost:3000/api/v1/account/balance", {
-                headers: { Authorization: `Bearer ${token}` }
-            })
-                .then(response => {
-                    setBalance(response.data.balance); // Set balance from API response
-                })
-                .catch(error => {
-                    console.error("Error fetching balance:", error);
-                });
-        }
-    }, [currentUserId]);
-
+    
+        axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/bulk?filter=${filter}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(response => {
+            setUsers(response.data.user);
+        })
+        .catch(err => {
+            console.error("❌ Failed to fetch users:", err.response?.data || err.message);
+        });
+    }, [filter]);
+    
     return <>
         <div className="font-bold mt-6 text-lg">
             Users
         </div>
         <div className="my-2">
             <input onChange={(e) => {
-                setFilter(e.target.value);
-            }} type="text" placeholder="Search users..." className="w-full px-2 py-1 border rounded border-slate-200" />
+                setFilter(e.target.value)
+            }} type="text" placeholder="Search users..." className="w-full px-2 py-1 border rounded border-slate-200"></input>
         </div>
         <div>
-            {users.map(user => <User key={user._id} user={user} />)}
+            {users.map(user => <User user={user} />)}
         </div>
-    </>;
-};
+    </>
+}
 
-function User({ user }) {
+function User({user}) {
     const navigate = useNavigate();
 
     return <div className="flex justify-between">
@@ -72,16 +47,17 @@ function User({ user }) {
                     {user.firstName[0]}
                 </div>
             </div>
-            <div className="flex flex-col justify-center h-full">
+            <div className="flex flex-col justify-center h-ful">
                 <div>
                     {user.firstName} {user.lastName}
                 </div>
             </div>
         </div>
-        <div className="flex flex-col justify-center h-full">
-            <Button onClick={() => {
+
+        <div className="flex flex-col justify-center h-ful">
+            <Button onClick={(e) => {
                 navigate("/send?id=" + user._id + "&name=" + user.firstName);
             }} label={"Send Money"} />
         </div>
-    </div>;
+    </div>
 }

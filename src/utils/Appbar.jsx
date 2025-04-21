@@ -9,8 +9,10 @@ const Appbar = () => {
         const fetchBalance = async () => {
             try {
                 const token = localStorage.getItem("token");
+                
+                console.log("Attempting to fetch balance from:", backendUrl);
 
-                const response = await axios.get("http://localhost:3000/api/v1/account/balance", {
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/account/balance`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -19,7 +21,7 @@ const Appbar = () => {
                 const formattedBalance = `: ${parseFloat(response.data.balance).toFixed(2)}`;
                 setBalance(formattedBalance);
             } catch (error) {
-                console.error("Error fetching balance:", error);
+                console.error("Error fetching balance:", error.message || error);
             }
         };
 
@@ -30,7 +32,7 @@ const Appbar = () => {
         <div className="shadow h-14 flex justify-between mt-5">
             <Balance value={balance} />
             <div className="flex">
-                <div className="flex flex-col justify-center h-full mr-4">
+                <div className="color-[white] flex flex-col justify-center h-full mr-4 ">
                     Hello
                 </div>
                 <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center mt-1 mr-5">
