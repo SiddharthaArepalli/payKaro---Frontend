@@ -9,9 +9,6 @@ const Appbar = () => {
         const fetchBalance = async () => {
             try {
                 const token = localStorage.getItem("token");
-                
-                console.log("Attempting to fetch balance from:", backendUrl);
-
                 const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/account/balance`, {
                     headers: {
                         Authorization: `Bearer ${token}`
