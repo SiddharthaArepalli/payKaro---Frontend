@@ -7,12 +7,21 @@ export const Users = () => {
     const [users, setUsers] = useState([]);
     const [filter, setFilter] = useState("");
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/bulk?filter=` + filter)
-            .then(response => {
-                setUsers(response.data.user)
-            })
-    }, [filter])
-
+        const token = localStorage.getItem("token");
+    
+        axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/bulk?filter=${filter}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(response => {
+            setUsers(response.data.user);
+        })
+        .catch(err => {
+            console.error("❌ Failed to fetch users:", err.response?.data || err.message);
+        });
+    }, [filter]);
+    
     return <>
         <div className="font-bold mt-6 text-lg">
             Users
