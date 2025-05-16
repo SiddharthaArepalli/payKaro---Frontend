@@ -1,12 +1,45 @@
-# React + Vite
+# 💸 PayKaro - Peer-to-Peer Money Transfer Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Tech](https://img.shields.io/badge/stack-MERN-green)
 
-Currently, two official plugins are available:
+PayKaro is a simple, secure, and fast **peer-to-peer money transferring web application** built using the MERN stack (MongoDB, Express.js, React.js, Node.js). It allows users to send and receive money instantly using their unique PayKaro ID.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🔐 **Authentication & Authorization** (JWT-based)
+- 👤 User Registration & Login
+- 💳 Send & Receive Money with PayKaro ID
+- 🧾 Transaction History
+- 🧠 Intuitive Dashboard
+- 📈 Real-Time Balance Updates
+- 🛡️ Backend Validations & Security
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- React.js
+- Axios
+- React Router
+- Tailwind CSS
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- JWT Authentication
+- Bcrypt.js for password hashing
+
+---
+
+## 📦 Installation
+
+### Clone the repository
+
+```bash
+git clone https://github.com/SiddharthaArepalli/payKaro---Frontend.git
+cd payKaro---Frontend
